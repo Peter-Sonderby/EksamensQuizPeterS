@@ -63,7 +63,7 @@ const SDK = {
                 if (err) return cb(err);
                 //on Sucess
                  SDK.Storage.persist("token", data.userId);
-                 SDK.Storage.persist("userId", data.userId);
+                 SDK.Storage.persist("userId", 31); // DUMMI SLET SLET SLET VED SENER TIDSPUNKT !!!
                  SDK.Storage.persist("type", data.type);
                  SDK.Storage.persist("username", data.username);
 
@@ -147,5 +147,21 @@ const SDK = {
                 cb(null, data);
             });
         },
-    }
+    },
+    //Denne funktion tjekker programet for fejl og retunere fejlkoder til brugeren.
+    errorCheckF: (err) => {
+        // Concept er at lave alle fejl kode check i en funktion
+
+        if (err && err.xhr.status === 401) {
+            window.alert("fejl 401 du har ikke adgang til denne funktion")
+        }
+        else if (err && err.xhr.status === 204) {
+            console.log("quiz'en findes ikke / forkert Quiz ID")
+
+        } else if (err) {
+            window.alert("Du har ramt en ukendt fejl prøv igen")
+
+        }
+
+    },
 };

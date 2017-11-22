@@ -7,18 +7,13 @@ $(document).ready(() => {
         const password = $("#password").val();
 
         SDK.User.login(userName, password, (err, data) => {
-            if (err && err.xhr.status === 401) {
-            }
-            else if (err){
-                console.log("BAd stuff happened")
-            } else {
-                //Egen info, bare til test lige pt
-                window.alert("Du Er nu logget ind");
-                window.location.href = "mainUsersMenu.html";
-
-            }
+           if(err){
+               SDK.errorCheckF(err) // dette er en funktion der bliver brugt til at give brugeren en fejlkode / forklaring ved fejl.
+           } else {
+               //Egen info, bare til test lige pt
+               window.alert("Du Er nu logget ind");
+               window.location.href = "mainUsersMenu.html";
+           }
         });
-
     });
-
 });
