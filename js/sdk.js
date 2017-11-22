@@ -74,6 +74,28 @@ const SDK = {
             });
         },
 
+        getUserInfo: () => {
+            SDK.request({
+                headers: {authorization: userToken/*SDK.Storage.load("tokenId")*/},
+                url: "/myuser",
+                method: "GET"
+            }, (err, data) => {
+
+                //On login-error
+                if (err) return cb(err);
+                //on Sucess
+                SDK.Storage.persist("token", data.userId);
+                SDK.Storage.persist("userId", data.userId);
+                SDK.Storage.persist("type", data.type);
+                SDK.Storage.persist("username", data.username);
+                SDK.Storage.persist("password", data.password);
+
+
+                cb(null, data);
+
+            });
+        }, // Not DON YET work in progress.
+
         logout: () => {
             //Denne funktion fjerne brugerens informationer fra lokal legert når der logges ud.
           SDK.Storage.remove("userId");
