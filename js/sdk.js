@@ -66,13 +66,13 @@ const SDK = {
                  SDK.Storage.persist("userId", data.userId);
                  SDK.Storage.persist("type", data.type);
                  SDK.Storage.persist("username", data.username);
-                 SDK.Storage.persist("password", data.password);
+
 
 
                 cb(null, data);
 
             });
-        },
+        }, // Mangler Presist integration
 
         getUserInfo: () => {
             SDK.request({
@@ -98,11 +98,26 @@ const SDK = {
 
         logout: () => {
             //Denne funktion fjerne brugerens informationer fra lokal legert når der logges ud.
+            SDK.request({
+
+                data: {
+                  userId: SDK.Storage.load("userId") // Her benyttes et gemt bruger id at logge brugeren ud af systemet.
+                },
+                headers: {authorization: userToken/*SDK.Storage.load("tokenId")*/},
+                url: "/logout",
+                method: "POST"
+            }, (err, data) => {
+                if (err) return cb(err);
+
+                cb(null, data);
+            });
+            //Her fjernes de forskelige oplysninger om brugeren fra lokal Storage. Dette Gørs så der ikke er gemt oplysninger
+            // der kan tilgås af utlisigtede personer/enheder.
+            //På sigt vil det give mening at lave en auto logout funktion.
           SDK.Storage.remove("userId");
           SDK.Storage.remove("type");
           SDK.Storage.remove("Token");
           SDK.Storage.remove("username");
-          SDK.Storage.remove("password");
         },
         //test af git
         newUser: (username, password, cb) => {
