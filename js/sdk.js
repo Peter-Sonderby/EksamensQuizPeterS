@@ -159,7 +159,7 @@ const SDK = {
             console.log("quiz'en findes ikke / forkert Quiz ID")
 
         } else if (err) {
-            window.alert("Du har ramt en ukendt fejl prøv igen")
+            window.alert("Du har ramt en ukendt fejl prøv igen. Hvis dette blever ved kontakt da din lokale system administrator" + err.xhr.status)
 
         }
 
