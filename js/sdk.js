@@ -103,7 +103,7 @@ const SDK = {
                 data: {
                   userId: SDK.Storage.load("userId") // Her benyttes et gemt bruger id at logge brugeren ud af systemet.
                 },
-                headers: {authorization: userToken/*SDK.Storage.load("tokenId")*/},
+              //  headers: {authorization: userToken/*SDK.Storage.load("tokenId")*/},
                 url: "/logout",
                 method: "POST"
             }, (err, data) => {
