@@ -96,7 +96,7 @@ const SDK = {
             });
         }, // Not DON YET work in progress.
 
-        logout: () => {
+        logout: (cb) => {
             //Denne funktion fjerne brugerens informationer fra lokal legert når der logges ud.
             SDK.request({
 
@@ -104,7 +104,7 @@ const SDK = {
                   userId: SDK.Storage.load("userId") // Her benyttes et gemt bruger id at logge brugeren ud af systemet.
                 },
               //  headers: {authorization: userToken/*SDK.Storage.load("tokenId")*/},
-                url: "/logout",
+                url: "/user/logout",
                 method: "POST"
             }, (err, data) => {
                 if (err) return cb(err);
@@ -151,8 +151,13 @@ const SDK = {
     //Denne funktion tjekker programet for fejl og retunere fejlkoder til brugeren.
     errorCheckF: (err) => {
         // Concept er at lave alle fejl kode check i en funktion
-
-        if (err && err.xhr.status === 401) {
+        if (err && err.xhr.status === 500) {
+            window.alert("fejl 500: Der er sket en fejl på severens side. Prøv igen. Hvis det er et problem der sker flere gange kontakt system administrator ")
+        }
+        else if (err && err.xhr.status === 404) {
+            window.alert("fejl 404 Siden du prøver at tilgå findes ikke")
+        }
+       else if (err && err.xhr.status === 401) {
             window.alert("fejl 401 du har ikke adgang til denne funktion")
         }
         else if (err && err.xhr.status === 204) {

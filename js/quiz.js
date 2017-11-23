@@ -9,7 +9,7 @@ $(document).ready(() => {
             if(err){
                 SDK.errorCheckF(err) // dette er en funktion der bliver brugt til at give brugeren en fejlkode / forklaring ved fejl.
             }else{
-                     window.alert("Her ville der i det færige program være en quiz");
+                     window.alert("Her ville der i det færdige program være en quiz");
                  }
 
          });
