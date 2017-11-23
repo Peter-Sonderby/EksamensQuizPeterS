@@ -148,6 +148,22 @@ const SDK = {
             });
         },
     },
+
+    getCourses: {
+        // I denne klasse er alle funktioner der relatere sig til fag.
+        getSelectQuiz: (userToken, cb) =>{
+            SDK.request({
+                headers: {authorization: userToken/*SDK.Storage.load("tokenId")*/},
+                url: "/course/",
+                method: "GET"
+
+            }, (err, data) => {
+                if (err) return cb(err);
+
+                cb(null, data);
+            });
+        },
+    },
     //Denne funktion tjekker programet for fejl og retunere fejlkoder til brugeren.
     errorCheckF: (err) => {
         // Concept er at lave alle fejl kode check i en funktion
