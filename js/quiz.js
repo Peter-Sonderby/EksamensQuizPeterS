@@ -1,9 +1,9 @@
 $(document).ready(() => {
 
-    $(".fagSpe").click(function() {
+    $(".fagSpe").click(function () {
         const fagId = $(this).data("fag-id");
-            console.log(fagId);
-        SDK.Quiz.getSelectQuiz(fagId, (cb, data) =>{
+        console.log(fagId);
+        SDK.Quiz.getSelectQuiz(fagId, (cb, data) => {
             console.log(data);
             let cQuiz = JSON.parse(data);
             cQuiz.forEach(cQuiz => {
