@@ -1,4 +1,4 @@
-$(document).ready(() => {
+/*$(document).ready(() => {
     $("#loginBtn").click(() => {
 
         SDK.getCourses((err, courses) => {
@@ -6,12 +6,13 @@ $(document).ready(() => {
             else{
                 courses.forEach(courses => {
                 $fagBody.append(`
-        <tr>
-            <td>${courses.id}</td>
-            <td>${parseOrderItems(courses.orderItems)}</td>
-            <td>kr. ${sumTotal(courses.orderItems)}</td>
-        </tr>
-      );
-            }); }
+                    <tr>
+                    <td>${courses.id}</td>
+                    <td>${parseOrderItems(courses.orderItems)}</td>
+                    <td>kr. ${sumTotal(courses.orderItems)}</td>
+                    </tr>
+                );
+                }); }
         });
-});
+    });
+*/

@@ -63,38 +63,30 @@ const SDK = {
                 if (err) return cb(err);
                 //on Sucess
                 let altdata = JSON.parse(data) // dette obejekt benyttes til at gøre de eneklte objekter til brugbar data
-                 SDK.Storage.persist("token", altdata.token);
-                 SDK.Storage.persist("userId", altdata.userId); // DUMMI SLET SLET SLET VED SENER TIDSPUNKT !!!
-                 SDK.Storage.persist("type", altdata.type);
-                 SDK.Storage.persist("username", altdata.username);
-
-
-
+                 SDK.Storage.persist("token", altdata);
                 cb(null, data);
 
             });
         }, // Mangler Presist integration
 
-        getUserInfo: () => {
+        getUserInfo: (cb) => {
             SDK.request({
-                headers: {authorization: userToken/*SDK.Storage.load("tokenId")*/},
-                url: "/myuser",
+                headers: {authorization: SDK.Storage.load("token")},
+                url: "/user/myuser",
                 method: "GET"
             }, (err, data) => {
 
-                //On login-error
+
                 if (err) return cb(err);
-                //on Sucess
+                
                 let altdata = JSON.parse(data)
-                SDK.Storage.persist("token", altdata.userId);
+                SDK.Storage.persist("username", altdata.username);
                 SDK.Storage.persist("userId", altdata.userId);
                 SDK.Storage.persist("type", altdata.type);
-                SDK.Storage.persist("username", altdata.username);
-
                 cb(null, data);
 
             });
-        }, // Not DON YET work in progress.
+        },
 
         logout: (cb) => {
             //Denne funktion fjerne brugerens informationer fra lokal legert når der logges ud.
