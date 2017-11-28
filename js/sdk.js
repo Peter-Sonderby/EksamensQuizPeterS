@@ -29,7 +29,7 @@ const SDK = {
 
     },
     Storage: {
-        prefix: "Eksamens Quiz",
+        prefix: "Eksamens Quiz ",
         persist: (key, value) => {
             window.localStorage.setItem(SDK.Storage.prefix + key, (typeof value === 'object') ? JSON.stringify(value) : value)
         },
@@ -62,10 +62,11 @@ const SDK = {
                 //On login-error
                 if (err) return cb(err);
                 //on Sucess
-                 SDK.Storage.persist("token", data.userId);
-                 SDK.Storage.persist("userId", 31); // DUMMI SLET SLET SLET VED SENER TIDSPUNKT !!!
-                 SDK.Storage.persist("type", data.type);
-                 SDK.Storage.persist("username", data.username);
+                let altdata = JSON.parse(data) // dette obejekt benyttes til at gøre de eneklte objekter til brugbar data
+                 SDK.Storage.persist("token", altdata.token);
+                 SDK.Storage.persist("userId", altdata.userId); // DUMMI SLET SLET SLET VED SENER TIDSPUNKT !!!
+                 SDK.Storage.persist("type", altdata.type);
+                 SDK.Storage.persist("username", altdata.username);
 
 
 
@@ -84,12 +85,11 @@ const SDK = {
                 //On login-error
                 if (err) return cb(err);
                 //on Sucess
-                SDK.Storage.persist("token", data.userId);
-                SDK.Storage.persist("userId", data.userId);
-                SDK.Storage.persist("type", data.type);
-                SDK.Storage.persist("username", data.username);
-                SDK.Storage.persist("password", data.password);
-
+                let altdata = JSON.parse(data)
+                SDK.Storage.persist("token", altdata.userId);
+                SDK.Storage.persist("userId", altdata.userId);
+                SDK.Storage.persist("type", altdata.type);
+                SDK.Storage.persist("username", altdata.username);
 
                 cb(null, data);
 
