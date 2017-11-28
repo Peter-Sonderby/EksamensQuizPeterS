@@ -9,7 +9,7 @@ $(document).ready(() => {
                        <p  class="form-title"> ${SDK.Storage.load("userId")}</p>
                     </ul>
                         `;
-   $userLiset.append(myUserInfoHTML);
+        $userLiset.append(myUserInfoHTML);
 
 
     })

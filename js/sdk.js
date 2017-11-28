@@ -1,4 +1,3 @@
-
 const SDK = {
     serverURL: "http://localhost:8080/api",
     request: (options, cb) => {
@@ -63,7 +62,7 @@ const SDK = {
                 if (err) return cb(err);
                 //on Sucess
                 let altdata = JSON.parse(data) // dette obejekt benyttes til at gøre de eneklte objekter til brugbar data
-                 SDK.Storage.persist("token", altdata);
+                SDK.Storage.persist("token", altdata);
                 cb(null, data);
 
             });
@@ -93,9 +92,9 @@ const SDK = {
             SDK.request({
 
                 data: {
-                  userId: SDK.Storage.load("userId") // Her benyttes et gemt bruger id at logge brugeren ud af systemet.
+                    userId: SDK.Storage.load("userId") // Her benyttes et gemt bruger id at logge brugeren ud af systemet.
                 },
-              //  headers: {authorization: userToken/*SDK.Storage.load("tokenId")*/},
+                //  headers: {authorization: userToken/*SDK.Storage.load("tokenId")*/},
                 url: "/user/logout",
                 method: "POST"
             }, (err, data) => {
@@ -106,10 +105,10 @@ const SDK = {
             //Her fjernes de forskelige oplysninger om brugeren fra lokal Storage. Dette Gørs så der ikke er gemt oplysninger
             // der kan tilgås af utlisigtede personer/enheder.
             //På sigt vil det give mening at lave en auto logout funktion.
-          SDK.Storage.remove("userId");
-          SDK.Storage.remove("type");
-          SDK.Storage.remove("token");
-          SDK.Storage.remove("username");
+            SDK.Storage.remove("userId");
+            SDK.Storage.remove("type");
+            SDK.Storage.remove("token");
+            SDK.Storage.remove("username");
         },
         //test af git
         newUser: (username, password, cb) => {
@@ -127,7 +126,7 @@ const SDK = {
 
     Quiz: {
         // I denne klasse er alle funktioner der relatere sig til Quiz.
-        getSelectQuiz: (fagId, cb) =>{
+        getSelectQuiz: (fagId, cb) => {
             SDK.request({
                 headers: {authorization: SDK.Storage.load("token")},
                 url: "/quiz/" + fagId,
@@ -143,12 +142,12 @@ const SDK = {
 
     getCourses: {
         // I denne klasse er alle funktioner der relatere sig til fag.
-        getSelectQuiz: (userToken, cb) =>{
+        getSelectQuiz: (userToken, cb) => {
             SDK.request({
-                headers: {authorization: SDK.Storage.load("token")},
-                url: "/course",
-                method: "GET"
-            },
+                    headers: {authorization: SDK.Storage.load("token")},
+                    url: "/course",
+                    method: "GET"
+                },
 
                 (err, data) => {
                     if (err) return cb(err);
@@ -170,7 +169,7 @@ const SDK = {
                `);
 
                     });
-        });
+                });
         },
     },
     //Denne funktion tjekker programet for fejl og retunere fejlkoder til brugeren.
@@ -182,7 +181,7 @@ const SDK = {
         else if (err && err.xhr.status === 404) {
             window.alert("fejl 404 Siden du prøver at tilgå findes ikke")
         }
-       else if (err && err.xhr.status === 401) {
+        else if (err && err.xhr.status === 401) {
             window.alert("fejl 401 du har ikke adgang til denne funktion")
         }
         else if (err && err.xhr.status === 204) {
