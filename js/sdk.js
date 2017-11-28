@@ -67,7 +67,7 @@ const SDK = {
                 cb(null, data);
 
             });
-        }, // Mangler Presist integration
+        }, // DON
 
         getUserInfo: (cb) => {
             SDK.request({
@@ -78,7 +78,7 @@ const SDK = {
 
 
                 if (err) return cb(err);
-                
+
                 let altdata = JSON.parse(data)
                 SDK.Storage.persist("username", altdata.username);
                 SDK.Storage.persist("userId", altdata.userId);
@@ -86,7 +86,7 @@ const SDK = {
                 cb(null, data);
 
             });
-        },
+        }, // DON
 
         logout: (cb) => {
             //Denne funktion fjerne brugerens informationer fra lokal legert når der logges ud.
@@ -108,7 +108,7 @@ const SDK = {
             //På sigt vil det give mening at lave en auto logout funktion.
           SDK.Storage.remove("userId");
           SDK.Storage.remove("type");
-          SDK.Storage.remove("Token");
+          SDK.Storage.remove("token");
           SDK.Storage.remove("username");
         },
         //test af git
@@ -129,7 +129,7 @@ const SDK = {
         // I denne klasse er alle funktioner der relatere sig til Quiz.
         getSelectQuiz: (fagId, userToken, cb) =>{
             SDK.request({
-                headers: {authorization: userToken/*SDK.Storage.load("tokenId")*/},
+                headers: {authorization: SDK.Storage.load("token")},
                 url: "/quiz/" + fagId,
                 method: "GET"
 
@@ -145,15 +145,31 @@ const SDK = {
         // I denne klasse er alle funktioner der relatere sig til fag.
         getSelectQuiz: (userToken, cb) =>{
             SDK.request({
-                headers: {authorization: userToken/*SDK.Storage.load("tokenId")*/},
-                url: "/course/",
+                headers: {authorization: SDK.Storage.load("token")},
+                url: "/course",
                 method: "GET"
+            },
 
-            }, (err, data) => {
-                if (err) return cb(err);
+                (err, data) => {
+                    if (err) return cb(err);
 
-                cb(null, data);
-            });
+                    console.log(data);
+                    let cCourse = JSON.parse(data)
+                    cCourse.forEach(cCourse => {
+                        $("#fagBody").append(`
+                   <div>
+                   <table>
+                         <tr>
+                            <th>${cCourse.courseTitle}</th>
+                            <th>
+                            <button id="courseBtn">vælg</button>
+                            </th>
+                          </tr>
+                        </table>
+                    </div>
+               `);
+                    });
+        });
         },
     },
     //Denne funktion tjekker programet for fejl og retunere fejlkoder til brugeren.

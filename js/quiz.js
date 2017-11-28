@@ -1,4 +1,4 @@
-$(document).ready(() => {
+/*$(document).ready(() => {
 
         $("#FagBtn").click(() => {
             // Disse værdier er dummis
@@ -16,3 +16,4 @@ $(document).ready(() => {
     });
 
 });
+*/

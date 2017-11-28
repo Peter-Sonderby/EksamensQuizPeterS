@@ -13,12 +13,12 @@
     width:300px;
 }
 .form-field {
-    border: 1px solid #c9b7a2;
-    background: #e4d5c3;
+    border: 1px solid #f7f1ff;
+    background: #f7f1ff;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px;
-    color: #c9b7a2;
+    color: #f7f1ff;
     -webkit-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(000,000,000,0.7) 0 0px 0px;
     -moz-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(000,000,000,0.7) 0 0px 0px;
     box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(000,000,000,0.7) 0 0px 0px;
@@ -31,7 +31,7 @@
     color: #000000;
 }
 .form-container h2 {
-    text-shadow: #fdf2e4 0 1px 0;
+    text-shadow: #f7f1ff 0 1px 0;
     font-size:18px;
     margin: 0 0 10px 0;
     font-weight:bold;
@@ -98,13 +98,21 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #ececec;
+    background-color: #5a77bf;
 }
 
 li {
     float: left;
 }
-
+p {
+    display: block;
+    color: red;
+    text-align: center;
+    padding: 10px 14px;
+}
+.userinf{
+    padding: 10px;
+}
 li a {
     display: block;
     color: white;

@@ -1,18 +1,26 @@
-/*$(document).ready(() => {
-    $("#loginBtn").click(() => {
+$(document).ready(() => {
+    $("#FagBtn").click(() => {
 
-        SDK.getCourses((err, courses) => {
-            if(err) SDK.errorCheckF(err);
-            else{
-                courses.forEach(courses => {
-                $fagBody.append(`
-                    <tr>
-                    <td>${courses.id}</td>
-                    <td>${parseOrderItems(courses.orderItems)}</td>
-                    <td>kr. ${sumTotal(courses.orderItems)}</td>
-                    </tr>
-                );
-                }); }
+        SDK.getCourses.getSelectQuiz((cd) => {
+            console.log("linje 5 er inde i get  ");
+            if (err) SDK.errorCheckF(err);
+           /* else {
+                let cCourse = JSON.parse(courses)
+                cCourse.forEach(cCourse => {
+                    $fagBody.append(`
+                   <div>
+                   <table>
+                         <tr>
+                            <th>${cCourse.courseTitle}</th>
+                            <th>
+                            <button>vælg</button>
+                            </th>
+                          </tr>
+                        </table>
+                    </div>
+               `);
+                });
+            }*/
         });
     });
-*/
+});
