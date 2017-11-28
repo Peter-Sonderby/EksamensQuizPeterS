@@ -127,7 +127,7 @@ const SDK = {
 
     Quiz: {
         // I denne klasse er alle funktioner der relatere sig til Quiz.
-        getSelectQuiz: (fagId, userToken, cb) =>{
+        getSelectQuiz: (fagId, cb) =>{
             SDK.request({
                 headers: {authorization: SDK.Storage.load("token")},
                 url: "/quiz/" + fagId,
@@ -135,7 +135,7 @@ const SDK = {
 
             }, (err, data) => {
                 if (err) return cb(err);
-
+                console.log(data)
                 cb(null, data);
             });
         },
@@ -162,12 +162,13 @@ const SDK = {
                          <tr>
                             <th>${cCourse.courseTitle}</th>
                             <th>
-                            <button id="courseBtn">vælg</button>
+                            <button class="fagSpe" data-fag-id=${cCourse.courseId}>vælg</button>
                             </th>
                           </tr>
                         </table>
                     </div>
                `);
+
                     });
         });
         },
