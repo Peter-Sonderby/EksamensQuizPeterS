@@ -2,7 +2,7 @@ $(document).ready(() => {
 
 
     $("#loginBtn").click(() => {
-
+        event.preventDefault();
         const userName = $("#userName").val();
         const password = $("#password").val();
 

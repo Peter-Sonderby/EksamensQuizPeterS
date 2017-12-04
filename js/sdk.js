@@ -2,7 +2,7 @@ const SDK = {
     serverURL: "http://localhost:8080/api",
     request: (options, cb) => {
 // Indsat da det stopper siden fra at opdatere før scriptet er kør til ende. hvilket ødlagde funktionen
-        event.preventDefault();
+      //  event.preventDefault();
         let headers = {};
         if (options.headers) {
             Object.keys(options.headers).forEach((h) => {
@@ -126,16 +126,37 @@ const SDK = {
 
     Quiz: {
         // I denne klasse er alle funktioner der relatere sig til Quiz.
-        getSelectQuiz: (fagId, cb) => {
+        getSelectQuiz: (fagId,cb) => {
+           // const fagId = $(this).attr("data-fag-id");
+            console.log(fagId);
             SDK.request({
                 headers: {authorization: SDK.Storage.load("token")},
                 url: "/quiz/" + fagId,
                 method: "GET"
 
             }, (err, data) => {
-                if (err) return cb(err);
-                console.log(data)
-                cb(null, data);
+                if (err) SDK.errorCheckF(err);
+                let cQuiz = JSON.parse(data);
+                console.log(data);
+                cQuiz.forEach(cQuiz => {
+                    $("#fagBody").append(`
+                   <div>
+                   <table>
+                         <tr>
+                            <th>${cQuiz.quizId}</th>
+                            <th>${cQuiz.createdBy}</th>
+                            <th>${cQuiz.questionCount}</th>
+                            <th>${cQuiz.quizTitle}</th>
+                            <th>${cQuiz.quizDescription}</th>
+                            <th>
+                            <button class="quizSpe" onclick="">vælg</button>
+                            </th>
+                          </tr>
+                        </table>
+                    </div>
+               `);
+
+                });
             });
         },
     },
@@ -153,18 +174,20 @@ const SDK = {
                     if (err) return cb(err);
 
                     console.log(data);
-                    let cCourse = JSON.parse(data)
+                    let cCourse = JSON.parse(data);
                     cCourse.forEach(cCourse => {
+                        console.log(cCourse.courseId);
                         $("#fagBody").append(`
                    <div>
                    <table>
                          <tr>
                             <th>${cCourse.courseTitle}</th>
                             <th>
-                            <button class="fagSpe" data-fag-id=${cCourse.courseId}>vælg</button>
+                            <button class="fagSpe" onclick="SDK.Quiz.getSelectQuiz(${cCourse.courseId})">vælg</button>
                             </th>
                           </tr>
                         </table>
+                      
                     </div>
                `);
 
