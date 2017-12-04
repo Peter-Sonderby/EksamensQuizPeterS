@@ -126,7 +126,7 @@ const SDK = {
 
     Quiz: {
         // I denne klasse er alle funktioner der relatere sig til Quiz.
-        getSelectQuiz: (fagId,cb) => {
+        getSelectQuiz: (fagId) => {
            // const fagId = $(this).attr("data-fag-id");
             console.log(fagId);
             SDK.request({
@@ -148,6 +148,40 @@ const SDK = {
                             <th>${cQuiz.questionCount}</th>
                             <th>${cQuiz.quizTitle}</th>
                             <th>${cQuiz.quizDescription}</th>
+                            <th>
+                            <button class="quizSpe" onclick="SDK.Quiz.startSelectQuiz(${cQuiz.quizId})">vælg</button>
+                            </th>
+                          </tr>
+                        </table>
+                    </div>
+               `);
+
+                });
+            });
+        },
+
+        startSelectQuiz: (quizId) =>{
+
+           event.preventDefault();
+            console.log("Valgte quiz id " + quizId);
+            SDK.request({
+                headers: {authorization: SDK.Storage.load("token")},
+                url: "/question/" + quizId,
+                method: "GET"
+
+            }, (err, data) => {
+                if (err) SDK.errorCheckF(err);
+                console.log(data);
+                let question = JSON.parse(data);
+                window.location.href = "quizWindow.html";
+                console.log(data);
+                question.forEach(question => {
+                    $("#startQuiz").append(`
+                   <div>
+                   <table>
+                         <tr>
+                            <th>${question.questionId}</th>
+                            <th>${question.question}</th>
                             <th>
                             <button class="quizSpe" onclick="">vælg</button>
                             </th>
@@ -210,8 +244,11 @@ const SDK = {
         else if (err && err.xhr.status === 204) {
             console.log("quiz'en findes ikke / forkert Quiz ID")
 
-        } else if (err) {
-            window.alert("Du har ramt en ukendt fejl prøv igen. Hvis dette blever ved kontakt da din lokale system administrator" + err.xhr.status)
+        } else if (err && err.xhr.status === 0) {
+            console.log("Shit fejlkode 0 ")
+
+        }else if (err) {
+            window.alert("Du har ramt en ukendt fejl prøv igen. Hvis dette blever ved kontakt da din lokale system administrator " + err.xhr.status)
 
         }
 
