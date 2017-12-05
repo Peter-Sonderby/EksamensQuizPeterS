@@ -160,7 +160,7 @@ const SDK = {
             });
         },
 
-        startSelectQuiz: (quizId) =>{
+        startSelectQuiz: (quizId , cb) =>{
 
            event.preventDefault();
             console.log("Valgte quiz id " + quizId);
@@ -171,28 +171,25 @@ const SDK = {
 
             }, (err, data) => {
                 if (err) SDK.errorCheckF(err);
-                console.log(data);
                 let question = JSON.parse(data);
-                window.location.href = "quizWindow.html";
-                console.log(data);
-                question.forEach(question => {
-                    $("#startQuiz").append(`
-                   <div>
-                   <table>
-                         <tr>
-                            <th>${question.questionId}</th>
-                            <th>${question.question}</th>
-                            <th>
-                            <button class="quizSpe" onclick="">vælg</button>
-                            </th>
-                          </tr>
-                        </table>
-                    </div>
-               `);
+                SDK.Storage.persist("question", question)
 
-                });
+                window.location.href = "quizWindow.html"
+                console.log(data);
             });
         },
+
+        getTheOptions: (questionId) =>{
+            SDK.request({
+                headers: {authorization: SDK.Storage.load("token")},
+                url: "/option/" + questionId,
+                method: "GET"
+
+            }, (err, data) => {
+                if (err) SDK.errorCheckF(err);
+                let option = JSON.parse(data);
+                SDK.Storage.persist("option", option)
+            }) },
     },
 
     getCourses: {
