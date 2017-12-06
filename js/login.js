@@ -13,8 +13,9 @@ $(document).ready(() => {
                 SDK.User.getUserInfo((err, data) => {
                         if (err) {
                             SDK.errorCheckF(err)
-                        } else {
-                            //Egen info, bare til test lige pt
+                        } if(SDK.Storage.load("type") === 1) {
+                        window.location.href = "mainAdminMenu.html";
+                    }else{   //Egen info, bare til test lige pt
                             window.alert("Du Er nu logget ind");
                             window.location.href = "mainUsersMenu.html";
                         }
