@@ -27,6 +27,7 @@
     margin-bottom: 20px;
     width: 280px;
 }
+.userinf{ border: black 2px}
 
 .form-field:focus {
     background: #fff;

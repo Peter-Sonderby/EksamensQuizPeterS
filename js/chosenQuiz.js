@@ -8,35 +8,12 @@ $(document).ready(() => {
                             <th>${question.questionId}</th>
                             <th>${question.question}</th>
                             <th >
-                            <button class="quizSpe" onclick="">vælg</button>
+                            <button class="quizSpe" onclick="js/sdk.js">vælg</button>
                             </th>
                           </tr>
                         </table>
+                        <div  class="userinf" id="theOption"></div>
                     </div>
                `);
-
-        SDK.Quiz.getTheOptions(question.questionId, (cb) => {
-            let option = SDK.Storage.load("option")
-            option.forEach(option =>{
-                $("#option").append(`
-                <div>
-                 <table>
-                         <tr>
-                            <th>${option.optionId}</th>
-                            <th>${option.option}</th>
-                            <th>
-                            <button class="quizSpe" onclick="">vælg</button>
-                            </th>
-                       </tr>
-                  </table>
-                   </div>
-                `)
-            })
-
-        });
-
         })
-
-
-
 });

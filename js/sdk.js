@@ -188,7 +188,24 @@ const SDK = {
             }, (err, data) => {
                 if (err) SDK.errorCheckF(err);
                 let option = JSON.parse(data);
-                SDK.Storage.persist("option", option)
+                option.forEach(option =>{
+                    $("#theOption").append(`
+                <div>
+                 <table>
+                         <tr>
+                            <th>${option.optionId}</th>
+                            <th>${option.option}</th>
+                            <th>
+                            <button class="options" onclick="">vælg</button>
+                            </th>
+                       </tr>
+                  </table>
+                   </div>
+                `)
+                })
+                return data;
+                console.log(data)
+                SDK.Storage.persist("option", option);
             }) },
     },
 
