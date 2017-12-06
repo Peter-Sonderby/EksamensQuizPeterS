@@ -196,7 +196,7 @@ const SDK = {
                             <th>${option.optionId}</th>
                             <th>${option.option}</th>
                             <th>
-                            <input type="radio" value="${option.isCorrect}"> <br>
+                            <input type="checkbox" class="checkbox" value="${option.isCorrect}"> <br>
                             </th>
                        </tr>
                   </table>
