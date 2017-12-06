@@ -196,17 +196,21 @@ const SDK = {
                             <th>${option.optionId}</th>
                             <th>${option.option}</th>
                             <th>
-                            <button class="options" onclick="">vælg</button>
+                            <input type="radio" value="${option.isCorrect}"> <br>
                             </th>
                        </tr>
                   </table>
                    </div>
                 `)
                 })
-                return data;
-                console.log(data)
                 SDK.Storage.persist("option", option);
-            }) },
+            })
+        },
+
+        checkTheOption:(isCorrect) =>{
+            if(isCorrect === 1){window.alert("Du valgte rigtigt. Der var du god")
+            }else{window.alert("prøv igen")}
+        },
     },
 
     getCourses: {

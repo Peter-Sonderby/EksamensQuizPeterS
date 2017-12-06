@@ -7,9 +7,7 @@ $(document).ready(() => {
                          <tr>
                             <th>${question.questionId}</th>
                             <th>${question.question}</th>
-                            <th >
-                            <button class="quizSpe" onclick="js/sdk.js">vælg</button>
-                            </th>
+                            <th > </th>
                           </tr>
                         </table>
                         <div  class="userinf" id="theOption"></div>
