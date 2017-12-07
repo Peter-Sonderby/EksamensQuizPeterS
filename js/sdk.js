@@ -247,6 +247,66 @@ const SDK = {
                 });
         },
     },
+
+    // NQSS = New Quiz Spørgsmål Svar
+    NQSS: {
+      nyeQuiz : ( nrQuestion, createdBy, quizTitle, quizDescription, fagID, cb ) => {
+          SDK.request({
+              headers: {authorization: SDK.Storage.load("token")},
+              url: "/quiz/",
+              method: "POST",
+              data: {
+                  createdBy: createdBy,
+                  questionCount: nrQuestion,
+                  quizTitle: quizTitle,
+                  quizDescription: quizDescription,
+                  courseId: fagID,
+              }
+          }, (err, data) => {
+              if (err) return cb(err); else{
+                  let newQuiz = JSON.parse(data);
+                  SDK.Storage.persist("newQuiz", newQuiz);
+                  console.log(newQuiz);
+                  return cb(null, data);
+              }
+          });
+      },
+
+        newQuestion : ( newQuizId, quizQuestion, cb ) => {
+            SDK.request({
+                headers: {authorization: SDK.Storage.load("token")},
+                url: "/question/",
+                method: "POST",
+                data: {
+                    questionToQuizId: newQuizId,
+                    question: quizQuestion,
+                }
+            }, (err, data) => {
+                if (err) return cb(err); else{
+                    let newQuestion = JSON.parse(data);
+                    console.log(newQuestion);
+                    return cb(null, data);
+                }
+            });
+        },
+
+        nytSvar : (Answer, newQuestionId, status, cb ) => {
+            SDK.request({
+                headers: {authorization: SDK.Storage.load("token")},
+                url: "/option",
+                method: "POST",
+                data: {
+                    option: Answer,
+                    optionToQuestionId: newQuestionId,
+                    IsCorrect: status,
+                }
+            }, (err, data) => {
+                if (err) return cb(err); else{
+                    return cb(null, data);
+                }
+            });
+        }
+    },
     //Denne funktion tjekker programet for fejl og retunere fejlkoder til brugeren.
     errorCheckF: (err) => {
         // Concept er at lave alle fejl kode check i en funktion
