@@ -78,7 +78,7 @@ const SDK = {
 
                 if (err) return cb(err);
 
-                let altdata = JSON.parse(data)
+                let altdata = JSON.parse(data);
                 SDK.Storage.persist("username", altdata.username);
                 SDK.Storage.persist("userId", altdata.userId);
                 SDK.Storage.persist("type", altdata.type);
@@ -172,9 +172,9 @@ const SDK = {
             }, (err, data) => {
                 if (err) SDK.errorCheckF(err);
                 let question = JSON.parse(data);
-                SDK.Storage.persist("question", question)
+                SDK.Storage.persist("question", question);
 
-                window.location.href = "quizWindow.html"
+                window.location.href = "quizWindow.html";
                 console.log(data);
             });
         },
@@ -202,7 +202,7 @@ const SDK = {
                   </table>
                    </div>
                 `)
-                })
+                });
                 SDK.Storage.persist("option", option);
             })
         },

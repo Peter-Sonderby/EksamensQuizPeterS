@@ -7,6 +7,13 @@ $(document).ready(() => {
     <form class="form-container">
         <div class="form-title"><h2>Ny quiz</h2></div>
         
+        <text >Her under kan du vælge fag. 1 = VØS 3, 2 = DIS, 3 = Forandringsledelse, 4 = Makroøkonomi  </text>
+        
+        <input class="submit-button" type="button" value="1" id="vøs"/>
+        <input class="submit-button" type="button" value="2" id="dis"/>
+        <input class="submit-button" type="button" value="3" id="forandringsledelse"/>
+        <input class="submit-button" type="button" value="4" id="makroøkonomi"/>
+        
         <div class="form-title">Quiz Title </div>
         <input class="form-field" type="text" id="quizTitle" placeholder="Quiz Title" required=""/><br/>
                
@@ -22,7 +29,8 @@ $(document).ready(() => {
     </form>
     
     
-<script src="../js/nytSpørgsmål.js"></script>
+<script src="../js/newThings/nytSpørgsmål.js"></script>
+<script src="../js/newThings/valgAfFag.js"></script>
 </div>
                `);
 

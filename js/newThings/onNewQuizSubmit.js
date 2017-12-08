@@ -6,7 +6,7 @@ $(document).ready(() => {
     let createdBy  = SDK.Storage.load("username");
     let quizTitle = $("#quizTitle").val();
     let quizDescription = $("#newDescription").val();
-    let fagID = 1;
+    let fagID = SDK.Storage.load("fag");
        SDK.NQSS.nyeQuiz(nrQuestion, createdBy, quizTitle, quizDescription, fagID, (err, data) =>{
            if(err){
                SDK.errorCheckF(err);
@@ -83,7 +83,7 @@ $(document).ready(() => {
                                 }
                             })
                         }
-                       })
+                       });
                        o++ }
            }
        });
