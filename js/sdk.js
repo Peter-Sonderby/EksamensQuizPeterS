@@ -61,8 +61,8 @@ const SDK = {
                 //On login-error
                 if (err) return cb(err);
                 //on Sucess
-                let altdata = JSON.parse(data) // dette obejekt benyttes til at gøre de eneklte objekter til brugbar data
-                SDK.Storage.persist("token", altdata);
+                let user = JSON.parse(data) // dette obejekt benyttes til at gøre de eneklte objekter til brugbar data
+                SDK.Storage.persist("token", user);
                 cb(null, data);
 
             });
