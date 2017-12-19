@@ -126,7 +126,7 @@ const SDK = {
 
     Quiz: {
         // I denne klasse er alle funktioner der relatere sig til Quiz.
-        getSelectQuiz: (fagId) => {
+        getSelectQuiz: (fagId, cb) => {
            // const fagId = $(this).attr("data-fag-id");
             console.log(fagId);
             SDK.request({
@@ -139,7 +139,7 @@ const SDK = {
                 let cQuiz = JSON.parse(data);
                 console.log(data);
                 cQuiz.forEach(cQuiz => {
-                    $("#fagBody").append(`
+                   $("#fagBody").append(`
                    <div>
                    <table>
                          <tr>
@@ -155,9 +155,8 @@ const SDK = {
                         </table>
                     </div>
                `);
-
                 });
-            });
+                return cb(null, data)});
         },
 
         startSelectQuiz: (quizId , cb) =>{
@@ -207,6 +206,20 @@ const SDK = {
             })
         },
 
+        sletQuiz: (quizId) =>{
+            SDK.request({
+                headers: {authorization: SDK.Storage.load("token")},
+                url: "/quiz/" + quizId,
+                method: "DELETE"
+
+            }, (err, data) => {
+                if (err) SDK.errorCheckF(err); else{
+                    window.alert("Den Valgte quiz er blevet slettet Du kan nu trykke F5 for gøre siden blank, eller slette en anden quiz ved at trykke vælg igen. ")
+                }
+
+            });
+        },
+
         checkTheOption:(isCorrect) =>{
             if(isCorrect === 1){window.alert("Du valgte rigtigt. Der var du god")
             }else{window.alert("prøv igen")}
@@ -215,7 +228,7 @@ const SDK = {
 
     getCourses: {
         // I denne klasse er alle funktioner der relatere sig til fag.
-        getSelectQuiz: (userToken, cb) => {
+        getSelectQuiz: (cb) => {
             SDK.request({
                     headers: {authorization: SDK.Storage.load("token")},
                     url: "/course",
@@ -242,7 +255,7 @@ const SDK = {
                       
                     </div>
                `);
-
+                        return cb(null, data)
                     });
                 });
         },

@@ -4,15 +4,17 @@ $(document).ready(() => {
         let isCorrect = " ";
         let score = 0;
         let questionNr = 0;
-        for(i = 0; i < svar.length; i++){
+        for(i = 0; i < svar.length;){
             console.log(svar[i].checked);
            if(svar[i].checked === true){
                let temp = svar[i].value;
                if (temp == 1) {
                    score++;
                    questionNr++;
+
                } else questionNr++;
-           } }
+
+           }  i++}
 
        /* svar.forEach(svar => {
             if (svar.value === 1) {
