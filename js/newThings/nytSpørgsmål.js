@@ -29,7 +29,7 @@ $(document).ready(() => {
         <input class="form-field" type="text" id="quizSvar4${+i}" placeholder="svar4" autofocus/><br/>
         
         <div class="form-title">Rigtie svar</div>
-        <input class="form-field" type="text" id="quizSvarR${+i}" placeholder="fx 1" autofocus/><br/>
+        <input class="form-field" type="text" id="quizSvarR${+i}" placeholder="fx 1 OBS Grundet fejl i progamet er svaret altide det der står i den første celle" autofocus/><br/>
        
     </form>
 

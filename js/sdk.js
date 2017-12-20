@@ -61,10 +61,9 @@ const SDK = {
                 //On login-error
                 if (err) return cb(err);
                 //on Sucess
-                let user = JSON.parse(data) // dette obejekt benyttes til at gøre de eneklte objekter til brugbar data
+                let user = JSON.parse(data) // dette objekt benyttes til at gøre de enkelte objekter til brugbar data
                 SDK.Storage.persist("token", user);
                 cb(null, data);
-
             });
         }, // DON
 
@@ -311,7 +310,7 @@ const SDK = {
                 data: {
                     option: Answer,
                     optionToQuestionId: newQuestionId,
-                    IsCorrect: status,
+                    isCorrect: status,
                 }
             }, (err, data) => {
                 if (err) return cb(err); else{
