@@ -1,6 +1,8 @@
 $(document).ready(() => {
     let question = SDK.Storage.load("question")
-    question.forEach(question => {
+    let i = 0;
+    question.forEach(question  => {
+
         $("#startQuiz").append(`
                    <div>
                    <table>
@@ -10,8 +12,8 @@ $(document).ready(() => {
                             <th > </th>
                           </tr>
                         </table>
-                        <div  class="userinf" id="theOption"></div>
+                        <div  class="userinf" id="theOption${+i}"></div>
                     </div>
                `);
-        })
+      i++  })
 });

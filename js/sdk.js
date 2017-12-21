@@ -177,7 +177,8 @@ const SDK = {
             });
         },
 
-        getTheOptions: (questionId) =>{
+        getTheOptions: (questionId, i2) =>{
+            let i3 = i2;
             SDK.request({
                 headers: {authorization: SDK.Storage.load("token")},
                 url: "/option/" + questionId,
@@ -186,8 +187,10 @@ const SDK = {
             }, (err, data) => {
                 if (err) SDK.errorCheckF(err);
                 let option = JSON.parse(data);
+
                 option.forEach(option =>{
-                    $("#theOption").append(`
+                   
+                    $("#theOption"+i3).append(`
                 <div>
                  <table>
                          <tr>
@@ -199,7 +202,7 @@ const SDK = {
                        </tr>
                   </table>
                    </div>
-                `)
+                `);
                 });
                 SDK.Storage.persist("option", option);
             })
